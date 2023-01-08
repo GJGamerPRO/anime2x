@@ -1,0 +1,84 @@
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel} %sorgt auch für Inhaltsverzeichnis Deutsch/Englisch
+\usepackage[top=25mm,left=30mm,right=30mm,bottom=25mm]{geometry}
+\usepackage[backend=biber,style=numeric,citestyle=numeric,sorting=none]{biblatex}
+\usepackage{csquotes}
+\usepackage{hyperref}
+
+%\usepackage[compact]{titlesec}
+%\titlespacing{\chapter}{0pt}{*0}{*0}
+%\titlespacing{\section}{0pt}{*0}{*0}
+%\titlespacing{\subsection}{0pt}{*0}{*0}
+%\titlespacing{\subsubsection}{0pt}{*0}{*0} 
+
+\newcommand{\eigenname}[1]{\emph{#1}}
+\usepackage{titlesec}
+\usepackage[nonumberlist,acronyms]{glossaries}
+\usepackage[printonlyused]{acronym}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{setspace}
+\usepackage{longtable}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{appendix}
+\usepackage[nottoc]{tocbibind}
+\usepackage{nameref}
+\usepackage{makecell}
+\renewcommand\theadfont{\bfseries}
+\usepackage{pdflscape}
+\usepackage{pdfpages}
+\usepackage{todonotes}
+
+\usepackage[official]{eurosym}
+\graphicspath{ {./Bilder/} }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%KOPF UND FUSSZEILE
+\usepackage[headsepline,footsepline,plainfootsepline,plainheadsepline]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\cfoot[\newline\pagemark]{\newline\pagemark}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeglossaries
+\glstoctrue
+\sloppy
+
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{0pt}{40pt}
+
+
+\addbibresource{Bib/bib.bib}
+
+%########################################
+%KATEGORIEN DER LITERATUR
+%NEUE KATEGORIE
+%\DeclareBibliographyCategory{Inet} 
+%RESOURCE IN KATEGORIE EINFÜGEN
+%\addtocategory{Inet}{stackoverflow2018survey}
+%########################################
+
+\DeclareBibliographyCategory{Inet}
+\addtocategory{Inet}{stackoverflow2018survey}
+
+%\geometry{top=25mm,left=25mm}
+
+
+
+\sloppy
+
+\usepackage{caption}
+\newcommand{\source}[1]{\caption*{Source: {#1}} }
+
+\usepackage{xparse}
+\DeclareDocumentCommand{\newdualentry}{ O{} O{} m m m m } {
+	\newglossaryentry{gls-#3}{name={#5},text={#5\glsadd{#3}},
+		description={#6},#1
+	}
+	\makeglossaries
+	\newacronym[see={[Glossary:]{gls-#3}},#2]{#3}{#4}{#5\glsadd{gls-#3}}
+}
